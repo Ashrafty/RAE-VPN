@@ -1,10 +1,8 @@
 # rae_vpn
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
+get a server config from 
+https://howdy.id/xray-vmess-vless-trojan/
+import the link and you are ready to use or if you have your own custom server you can import your files and use
 
 A few resources to get you started if this is your first Flutter project:
 
