@@ -1,4 +1,4 @@
-# rae_vpn
+# Rae VPN
 
 get a server config from 
 https://howdy.id/xray-vmess-vless-trojan/
