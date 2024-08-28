@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_v2ray/flutter_v2ray.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class V2RayService extends ChangeNotifier {
@@ -10,10 +11,15 @@ class V2RayService extends ChangeNotifier {
 
   late FlutterV2ray _flutterV2ray;
   bool _isConnected = false;
+  String _currentConfig = '';
   Timer? _durationTimer;
   int _durationInSeconds = 0;
+  List<String> _logs = [];
+  final _logsController = StreamController<List<String>>.broadcast();
 
   bool get isConnected => _isConnected;
+
+  Stream<List<String>> get logsStream => _logsController.stream;
 
   String get durationString {
     int hours = _durationInSeconds ~/ 3600;
@@ -25,16 +31,21 @@ class V2RayService extends ChangeNotifier {
   Future<void> initializeV2Ray() async {
     _flutterV2ray = FlutterV2ray(
       onStatusChanged: (status) {
+        var statusString = status.toString().split('.').last;
         var FlutterV2rayStatus;
         _isConnected = status == FlutterV2rayStatus.started;
+        _addLog('V2Ray status changed: $statusString');
         notifyListeners();
       },
     );
     await _flutterV2ray.initializeV2Ray();
+    _addLog('V2Ray initialized');
   }
 
   Future<bool> requestPermission() async {
-    return await _flutterV2ray.requestPermission();
+    bool permission = await _flutterV2ray.requestPermission();
+    _addLog('VPN permission ${permission ? 'granted' : 'denied'}');
+    return permission;
   }
 
   Future<void> startV2Ray(String config) async {
@@ -47,8 +58,12 @@ class V2RayService extends ChangeNotifier {
         proxyOnly: false,
       );
       _isConnected = true;
+      _currentConfig = config;
       _startDurationTimer();
+      _addLog('V2Ray started');
       notifyListeners();
+    } else {
+      _addLog('Failed to start V2Ray: Permission denied');
     }
   }
 
@@ -56,6 +71,7 @@ class V2RayService extends ChangeNotifier {
     await _flutterV2ray.stopV2Ray();
     _isConnected = false;
     _stopDurationTimer();
+    _addLog('V2Ray stopped');
     notifyListeners();
   }
 
@@ -67,6 +83,7 @@ class V2RayService extends ChangeNotifier {
   Future<void> saveConfig(String config) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('v2ray_config', config);
+    _addLog('Configuration saved');
   }
 
   void _startDurationTimer() {
@@ -92,5 +109,18 @@ class V2RayService extends ChangeNotifier {
       "192.172.0.0/14", "192.176.0.0/12", "192.192.0.0/10", "193.0.0.0/8",
       "194.0.0.0/7", "196.0.0.0/6", "200.0.0.0/5", "208.0.0.0/4", "240.0.0.0/4"
     ];
+  }
+
+  void _addLog(String log) {
+    String timestamp = DateTime.now().toString().split('.').first;
+    String formattedLog = '[$timestamp] $log';
+    _logs.add(formattedLog);
+    _logsController.add(_logs);
+  }
+
+  @override
+  void dispose() {
+    _logsController.close();
+    super.dispose();
   }
 }

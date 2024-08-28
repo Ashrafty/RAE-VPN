@@ -3,6 +3,10 @@ import 'package:flutter_v2ray/flutter_v2ray.dart';
 import 'package:rae_vpn/import_button.dart';
 import 'package:rae_vpn/v2ray_service.dart';
 import 'package:rae_vpn/vpn_button.dart';
+import 'package:rae_vpn/widgets/vpn_button.dart';
+import 'package:rae_vpn/widgets/import_button.dart';
+import 'package:rae_vpn/services/v2ray_service.dart';
+import 'package:rae_vpn/screens/logs_screen.dart';
 import 'package:file_picker/file_picker.dart';
 import 'dart:io';
 
@@ -111,6 +115,13 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
+  void _navigateToLogs() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const LogsScreen()),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -148,6 +159,21 @@ class _HomeScreenState extends State<HomeScreen> {
                 style: const TextStyle(color: Colors.white, fontSize: 16),
               ),
             ],
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: _navigateToLogs,
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFF05363F),
+                minimumSize: const Size(180, 36),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+              ),
+              child: const Text(
+                'View Logs',
+                style: TextStyle(color: Colors.white, fontSize: 16),
+              ),
+            ),
             const SizedBox(height: 20),
           ],
         ),

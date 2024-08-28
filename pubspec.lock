@@ -119,10 +119,10 @@ packages:
     dependency: "direct main"
     description:
       name: flutter_v2ray
-      sha256: "319b097f8b7182dc2b3063e9e9a5ff837b2d9516c5b400e2b2f8ee88b6c56ef3"
+      sha256: "4c65c94c530f905b7518f0838082c00423d3c090c320b34dd53f25dd54780a86"
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.7"
+    version: "1.0.8"
   flutter_web_plugins:
     dependency: transitive
     description: flutter
