@@ -1,16 +1,112 @@
-# rae_vpn
+# Rae VPN
 
-A new Flutter project.
+Rae VPN is a Flutter-based mobile application that provides a user-friendly interface for managing V2Ray VPN connections. This app allows users to import V2Ray configurations, connect to VPN servers, and monitor their connection status.
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application.
+- Import V2Ray configurations from files or URLs
+- Connect and disconnect from VPN servers
+- Display connection status and duration
+- Dark mode user interface
 
-A few resources to get you started if this is your first Flutter project:
+## App Screenshots
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+![Home Screen](screenshots/home_screen.png)
+*Home Screen with VPN disconnected*
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![Connected State](screenshots/connected_state.png)
+*Home Screen with VPN connected*
+
+![Import Config](screenshots/import_config.png)
+*Import Configuration screen*
+
+> Note: Replace the placeholder image paths with actual screenshots of your app. To add screenshots:
+> 1. Create a `screenshots` folder in your project root.
+> 2. Take screenshots of your app in various states.
+> 3. Save the screenshots in the `screenshots` folder.
+> 4. Update the image paths in this README to match your screenshot filenames.
+
+## Technologies Used
+
+- Flutter: Cross-platform UI framework
+- Dart: Programming language
+- flutter_v2ray: Plugin for V2Ray integration
+- file_picker: File selection functionality
+
+## Project Structure
+
+```
+rae_vpn/
+├── android/
+├── ios/
+├── lib/
+│   ├── screens/
+│   │   └── home_screen.dart
+│   ├── services/
+│   │   └── v2ray_service.dart
+│   ├── widgets/
+│   │   ├── import_button.dart
+│   │   └── vpn_button.dart
+│   ├── main.dart
+│   └── home_screen.dart
+├── pubspec.yaml
+└── README.md
+```
+
+## Main Components and Their Roles
+
+1. **main.dart**: Entry point of the application. It initializes the V2Ray service and sets up the main app widget.
+
+2. **home_screen.dart**: Contains the `HomeScreen` widget, which is the main UI of the application. It includes the VPN connection button, import options, and displays the connection status.
+
+3. **v2ray_service.dart**: Manages the V2Ray service, including starting and stopping the VPN connection, saving and retrieving configurations, and tracking the connection duration.
+
+4. **vpn_button.dart**: A custom widget for the main VPN connection button, which changes appearance based on the connection state.
+
+5. **import_button.dart**: A custom widget for importing V2Ray configurations, either from a file or a URL.
+
+## How to Build and Run
+
+1. Ensure you have Flutter installed on your system. If not, follow the [official Flutter installation guide](https://flutter.dev/docs/get-started/install).
+
+2. Clone the repository:
+   ```
+   git clone https://github.com/Ashrafty/RAE-VPN.git
+   cd rae_vpn
+   ```
+
+3. Install dependencies:
+   ```
+   flutter pub get
+   ```
+
+4. Run the app on a connected device or emulator:
+   ```
+   flutter run
+   ```
+
+## Usage
+
+1. Launch the Rae VPN app on your device.
+2. Import a V2Ray configuration using either the "Import Config" or "Import URL" button.
+3. Once a configuration is imported, tap the large VPN button in the center of the screen to connect.
+4. The button will change appearance and the connection status will be displayed when connected.
+5. Tap the button again to disconnect from the VPN.
+
+## Note
+
+This app requires proper V2Ray configurations to function correctly. Ensure you have valid V2Ray server details before attempting to connect.
+
+get a server config from https://howdy.id/xray-vmess-vless-trojan/ import the link and you are ready to use or if you have your own custom server you can import your files and use
+
+## License
+
+<!-- [Add your license information here] -->
+
+## Contributing
+
+<!-- [Add contribution guidelines here] -->
+
+## Support
+
+<!-- [Add support information or contact details here] -->
