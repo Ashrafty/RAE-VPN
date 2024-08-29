@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:rae_vpn/home_screen.dart';
+import 'package:provider/provider.dart';
+import 'package:rae_vpn/app_state.dart';
 import 'package:rae_vpn/screens/home_screen.dart';
 import 'package:rae_vpn/services/v2ray_service.dart';
-import 'package:rae_vpn/v2ray_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await V2RayService().initializeV2Ray();
-  runApp(const RaeVpnApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => AppState(),
+      child: const RaeVpnApp(),
+    ),
+  );
 }
 
 class RaeVpnApp extends StatelessWidget {
