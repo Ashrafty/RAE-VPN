@@ -12,19 +12,14 @@ Rae VPN is a Flutter-based mobile application that provides a user-friendly inte
 ## App Screenshots
 
 ![Home Screen](screenshots/home_screen.png)
-*Home Screen with VPN disconnected*
+
 
 ![Connected State](screenshots/connected_state.png)
-*Home Screen with VPN connected*
+
 
 ![Import Config](screenshots/import_config.png)
-*Import Configuration screen*
 
-> Note: Replace the placeholder image paths with actual screenshots of your app. To add screenshots:
-> 1. Create a `screenshots` folder in your project root.
-> 2. Take screenshots of your app in various states.
-> 3. Save the screenshots in the `screenshots` folder.
-> 4. Update the image paths in this README to match your screenshot filenames.
+
 
 ## Technologies Used
 
